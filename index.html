@@ -11,21 +11,26 @@
     const script = document.createElement('script');
     script.src = 'https://cdn.pushwoosh.com/webpush/v3/pushwoosh-web-notifications.js';
     script.async = true;
-
     script.onload = () => {
       console.log('✅ SDK загружен');
+
       window.Pushwoosh = window.Pushwoosh || [];
       Pushwoosh.push(function(api) {
         console.log('✅ SDK инициализирован');
+
         api.setAppCode('57769-FD020');
+        api.setDefaultNotificationTitle('Pushwoosh Test');
+        api.setDefaultNotificationImage('https://via.placeholder.com/128'); // просто иконка
+        api.setDefaultNotificationUrl('https://g0r0detsky1.github.io/pushwoosh/');
+        api.setServiceWorkerUrl('https://g0r0detsky1.github.io/pushwoosh/service-worker.js');
+
         api.subscribe().then(() => {
           console.log('✅ Подписка успешна');
-        }).catch(e => {
-          console.error('❌ Ошибка подписки:', e);
+        }).catch(error => {
+          console.error('❌ Ошибка подписки:', error);
         });
       });
     };
-
     document.head.appendChild(script);
   </script>
 </body>
