@@ -2,25 +2,34 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Pushwoosh Web SDK Test</title>
+  <title>Pushwoosh Test</title>
 </head>
 <body>
   <h1>Hello from Pushwoosh Web SDK!</h1>
 
   <script>
-    // Загружаем SDK
     const script = document.createElement('script');
     script.src = 'https://cdn.pushwoosh.com/webpush/v3/pushwoosh-web-notifications.js';
     script.onload = () => {
       console.log('SDK загружен');
-      pushwoosh.push(['init', {
-        logLevel: 'debug', // Убираешь в проде
-        applicationCode: '57769-FD020',
-        defaultNotificationTitle: 'Test Push',
-        defaultNotificationImage: 'https://via.placeholder.com/128',
-        serviceWorkerUrl: 'service-worker.js'
-      }]);
+
+      // Проверяем, появился ли pushwoosh в window
+      const waitForSDK = setInterval(() => {
+        if (window.pushwoosh) {
+          clearInterval(waitForSDK);
+          console.log('Pushwoosh инициализируется');
+
+          window.pushwoosh.push(['init', {
+            logLevel: 'debug',
+            applicationCode: '57769-FD020',
+            defaultNotificationTitle: 'Test Pushwoosh',
+            defaultNotificationImage: 'https://via.placeholder.com/128',
+            serviceWorkerUrl: 'service-worker.js',
+          }]);
+        }
+      }, 50); // Проверяем каждые 50 мс
     };
+
     document.head.appendChild(script);
   </script>
 </body>
