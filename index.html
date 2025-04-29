@@ -7,15 +7,14 @@
 <body>
   <h1>Hello from Pushwoosh Web SDK!</h1>
 
-<script>
-  const script = document.createElement('script');
-  script.src = 'https://cdn.pushwoosh.com/webpush/v3/pushwoosh-web-notifications.js';
-  script.onload = () => {
-    const pushwoosh = Pushwoosh.getInstance();
-    pushwoosh.register({ appId: '57769-FD020' });
-  };
-  document.head.appendChild(script);
-</script>
-
+  <script>
+    const script = document.createElement('script');
+    script.src = 'https://cdn.pushwoosh.com/webpush/v3/pushwoosh-web-notifications.js';
+    script.onload = () => {
+      const pushwoosh = Pushwoosh.getInstance();
+      pushwoosh.register({ appId: '57769-FD020' });
+    };
+    document.head.appendChild(script);
+  </script>
 </body>
 </html>
