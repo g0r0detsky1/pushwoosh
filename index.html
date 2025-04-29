@@ -2,17 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Pushwoosh Test</title>
+  <title>Pushwoosh Web Push Demo</title>
+  <link rel="manifest" href="manifest.json">
 </head>
 <body>
-  <h1>Hello from Pushwoosh Web SDK!</h1>
+  <h1>Hello from Pushwoosh Web SDK Demo!</h1>
 
   <script>
-    // Подключаем SDK
     const script = document.createElement('script');
     script.src = 'https://cdn.pushwoosh.com/webpush/v3/pushwoosh-web-notifications.js';
+    script.async = true;
     script.onload = () => {
-      console.log('SDK загружен');
+      console.log('SDK loaded');
 
       const waitForPushwoosh = setInterval(() => {
         if (window.pushwoosh && window.pushwoosh.push) {
@@ -20,8 +21,8 @@
 
           window.pushwoosh.push(['init', {
             logLevel: 'debug',
-            applicationCode: '57769-FD020',
-            defaultNotificationTitle: 'Test PUSH',
+            applicationCode: '57769-FD020', // ← Твой Application Code
+            defaultNotificationTitle: 'Pushwoosh Demo',
             defaultNotificationImage: 'https://via.placeholder.com/128',
             serviceWorkerUrl: 'service-worker.js',
             subscribeWidget: {
@@ -29,12 +30,10 @@
             }
           }]);
 
-          // Запрашиваем разрешение на уведомления
           window.pushwoosh.push(['subscribe']);
         }
       }, 100);
     };
-
     document.head.appendChild(script);
   </script>
 </body>
