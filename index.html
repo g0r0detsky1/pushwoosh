@@ -11,8 +11,15 @@
     const script = document.createElement('script');
     script.src = 'https://cdn.pushwoosh.com/webpush/v3/pushwoosh-web-notifications.js';
     script.onload = () => {
-      const pushwoosh = Pushwoosh.getInstance();
-      pushwoosh.register({ appId: '57769-FD020' });
+      // Ждём 100 мс, чтобы SDK успел проинициализироваться
+      setTimeout(() => {
+        if (typeof Pushwoosh !== 'undefined') {
+          const pushwoosh = Pushwoosh.getInstance();
+          pushwoosh.register({ appId: '57769-FD020' });
+        } else {
+          console.error('Pushwoosh SDK is loaded, but Pushwoosh is still undefined.');
+        }
+      }, 100);
     };
     document.head.appendChild(script);
   </script>
